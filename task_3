@@ -1,0 +1,10 @@
+Task:
+From the pod label name=cpu-burner, find pods running high CPU workloads and Write the name of the pod consuming most CPU to the file /tmp/cpu.txt.
+
+kubectl top pods -l name=cpu-burner -n kube-system --no-headers=true | head -n 1 | awk '(print $1)' > /tmp/cpu.txt
+
+(or)
+
+kubectl top pods -l name=cpu-burner -n kube-system 
+
+echo '<podname>' >> /tmp/cpu.txt
