@@ -1,0 +1,22 @@
+TasK: 
+*Create a PVC my-pvc with the capacity 10Gi and storage class k8s-csi-plugin. *
+
+• Assign the PVC to the pod named nginx-pod with image nginx and mount to path /usr/share/html 
+• Ensure the pod claims the volume as ReadWriteMany access mode 
+• Use kubectl patch or kubectl edit to update the capacity of the PVC as 70Gi to record the change.
+
+$ kubectl create -f pvc.yml
+
+$ kubectl create -f pod.yml
+
+$ kubectl delete pod my-nginx-pod --grace-period=0 --force
+
+$ kubectl patch pvc pvc-q1 -p '{ "spec": { "resources": { "requests": { "storage": "70Mi" }}}}'
+
+(or)
+
+$ kubectl edit pvc.yaml
+
+--> Update the storage size
+
+$ kubectl create -f my-nginx.yaml
