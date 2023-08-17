@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-pv
+spec:
+  storageClassName: k8s-csi-plugin
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Delete
+  local:
+    path: /home/storag1
+  nodeAffinity: 
+   required:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: kubernetes.io/hostname
+         operator: In
+         values:
+         - node01
